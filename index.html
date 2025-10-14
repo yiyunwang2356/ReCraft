@@ -185,6 +185,13 @@
       email: form.email.value,
       message: form.message.value,
       submittedAt: new Date()
+          // 寫入Firebase Realtime Database
+  formDataRef.push(data)
+    .then(() => console.log("資料寫入成功"))
+    .catch((error) => console.error("寫入失敗: ", error));
+
+  e.target.reset();  // 清空表單欄位
+});
     };
 
     db.collection('contacts').add(formData)
