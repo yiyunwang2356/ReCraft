@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Re:Craft - 訂製傢俱設計</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600;700&family=Poppins:wght[300;400;500;700}&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            /* 優先使用 Poppins for numbers/Latin, Noto for Chinese */
+            font-family: 'Poppins', 'Noto Sans TC', sans-serif;
+            background-color: #FDFDFC;
+            color: #333;
+        }
+        h1, h2, h3 {
+            font-family: 'Noto Serif TC', serif;
+        }
+        /* Gallery Image Hover Effect */
+        .gallery-item img {
+            transition: transform 0.3s ease-in-out;
+        }
+        .gallery-item:hover img {
+            transform: scale(1.03);
+        }
+        /* Custom form styling for a subtle look */
+        .form-input {
+            background-color: transparent;
+            border: 1px solid #ccc;
+            transition: all 0.3s;
+        }
+        .form-input:focus {
+            outline: none;
+            border-color: #333;
+            box-shadow: 0 0 0 2px rgba(51, 51, 51, 0.1);
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Header Section -->
+    <header class="py-8 px-6 md:px-12 border-b">
+        <div class="container mx-auto text-center">
+            <h1 class="text-4xl md:text-5xl font-bold tracking-wider text-gray-800">Re:Craft</h1>
+            <p class="mt-2 text-lg text-gray-500">讓舊物重生，打造專屬傢俱</p>
+        </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="container mx-auto px-6 md:px-12">
+
+        <!-- Introduction Section -->
+        <section class="text-center max-w-3xl mx-auto my-16 md:my-24">
+            <h2 class="text-3xl font-semibold mb-6 text-gray-700">重新設計，定義您的空間</h2>
+            <p class="text-base md:text-lg leading-relaxed text-gray-600">
+                透過我們的服務，您可以將舊的、不再使用的材料或傢俱賦予新的生命。Re:Craft 致力於將您的創意轉化為獨特的設計，無論是利用老木材、廢棄金屬，或是任何您提供的材料，我們都能為您創造出兼具美觀與實用性的訂製傢俱。
+            </p>
+        </section>
+
+        <!-- Inspiration Gallery Section -->
+        <section id="gallery" class="my-20 md:my-32">
+            <h2 class="text-3xl font-semibold text-center mb-12 text-gray-800">設計靈感</h2>
+            <div id="inspiration-gallery" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8">
+                <!-- Gallery items will be injected here by JavaScript -->
+                <div class="text-center col-span-full py-16 text-gray-500">
+                    載入設計圖片中...
+                </div>
+            </div>
+        </section>
+
+        <!-- Process Section -->
+        <section id="process" class="my-20 md:my-32">
+            <h2 class="text-3xl font-semibold text-center mb-12 text-gray-800">我們的製作流程</h2>
+            <div class="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-10 text-center">
+                <div class="process-step">
+                    <div class="text-4xl font-bold text-gray-300 mb-2">01</div>
+                    <h3 class="text-xl font-semibold mb-2">提交設計材料與需求</h3>
+                    <p class="text-gray-600">請告訴我們您想使用的材料種類、傢俱類型與功能需求，我們會進行初步評估。</p>
+                </div>
+                <div class="process-step">
+                    <div class="text-4xl font-bold text-gray-300 mb-2">02</div>
+                    <h3 class="text-xl font-semibold mb-2">設計草圖與報價</h3>
+                    <p class="text-gray-600">我們的設計師將根據您的需求製作 3D 草圖，並提供詳細的報價供您確認。</p>
+                </div>
+                <div class="process-step">
+                    <div class="text-4xl font-bold text-gray-300 mb-2">03</div>
+                    <h3 class="text-xl font-semibold mb-2">製作與運送</h3>
+                    <p class="text-gray-600">確認設計後，我們將開始製作並定期向您更新進度，確保成品能準時交付到您手上。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Order Form Section -->
+        <section id="order-form" class="my-20 md:my-32 bg-gray-50 py-16 md:py-20 rounded-xl shadow-lg">
+            <div class="max-w-2xl mx-auto px-6">
+                <h2 class="text-3xl font-semibold text-center mb-10 text-gray-800">獲取您的訂製報價</h2>
+                <!-- 移除所有驗證狀態提示，實現直接填單 -->
+                <form id="design-form" class="space-y-6">
+                    <div>
+                        <label for="name" class="block text-sm font-medium text-gray-700 mb-1">您的姓名</label>
+                        <input type="text" id="name" name="name" required class="form-input w-full px-4 py-2 rounded-md">
+                    </div>
+                    <div>
+                        <label for="contact" class="block text-sm font-medium text-gray-700 mb-1">聯絡方式 (電話或 Email)</label>
+                        <input type="text" id="contact" name="contact" required class="form-input w-full px-4 py-2 rounded-md">
+                    </div>
+                    <div>
+                        <label for="userMaterial" class="block text-sm font-medium text-gray-700 mb-1">您想使用的材料</label>
+                        <input type="text" id="userMaterial" name="userMaterial" placeholder="範例: 6mm舊木材, 廢棄金屬..." required class="form-input w-full px-4 py-2 rounded-md">
+                    </div>
+                    <div>
+                        <label for="furnitureType" class="block text-sm font-medium text-gray-700 mb-1">想訂製的傢俱類型</label>
+                        <input type="text" id="furnitureType" name="furnitureType" placeholder="範例: 老木材茶几, 金屬書架..." required class="form-input w-full px-4 py-2 rounded-md">
+                    </div>
+                    <div>
+                        <label for="details" class="block text-sm font-medium text-gray-700 mb-1">您的設計細節與尺寸</label>
+                        <textarea id="details" name="details" rows="4" placeholder="請提供您對尺寸、形狀、功能等詳細的要求..." required class="form-input w-full px-4 py-2 rounded-md"></textarea>
+                    </div>
+                    
+                    <div>
+                        <!-- 提交按鈕預設啟用 (移除 disabled) -->
+                        <button type="submit" id="submit-btn" class="w-full bg-gray-800 text-white font-bold py-3 px-6 rounded-md hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-800 focus:ring-opacity-50 transition-colors duration-300">
+                            提交設計需求
+                        </button>
+                    </div>
+                    
+                    <!-- Success Message -->
+                    <div id="success-message" class="hidden mt-6 p-4 border border-green-400 bg-green-100 text-green-700 rounded-md text-center">
+                        <p class="font-semibold">報價單已送出！</p>
+                        <p>我們已收到您的請求，將盡快與您聯繫。</p>
+                    </div>
+
+                    <!-- Error Message -->
+                    <div id="error-message" class="hidden mt-6 p-4 border border-red-400 bg-red-100 text-red-700 rounded-md text-center">
+                        <p class="font-semibold">❌ 提交發生錯誤！</p>
+                        <p>請檢查網路連線或稍後再試。若持續發生問題，請聯絡客服。</p>
+                    </div>
+                </form>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer Section -->
+    <footer class="bg-gray-100 py-8 border-t">
+        <div class="container mx-auto px-6 text-center text-gray-500 text-sm">
+            <p>© 2025 Re:Craft. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Firebase and Application Logic -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getFirestore, collection, addDoc, getDocs, serverTimestamp, query, onSnapshot } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+        import { getAuth, signInAnonymously, signInWithCustomToken } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        
+        // --- Firebase Configuration ---
+        let firebaseConfig = {};
+        try {
+            firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : {};
+        } catch (e) {
+            console.error("Failed to parse __firebase_config:", e);
+        }
+        
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+
+        // --- Initialize Firebase and Services ---
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+        const auth = getAuth(app);
+        
+        // --- DOM Elements ---
+        const form = document.getElementById('design-form');
+        const submitBtn = document.getElementById('submit-btn');
+        const successMessage = document.getElementById('success-message');
+        const errorMessage = document.getElementById('error-message');
+        const galleryContainer = document.getElementById('inspiration-gallery');
+
+        // --- Mock Data ---
+        const mockImages = [
+            { title: "老木材層架", description: "利用回收木材製作的工業風層架。", imageUrl: "https://placehold.co/400x300/a8dadc/ffffff?text=Recycled+Wood+Shelf" },
+            { title: "金屬邊几", description: "廢棄金屬管焊接成的簡約邊桌。", imageUrl: "https://placehold.co/400x300/457b9d/ffffff?text=Metal+Side+Table" },
+            { title: "織物屏風", description: "舊布料重新編織而成的裝飾屏風。", imageUrl: "https://placehold.co/400x300/1d3557/ffffff?text=Woven+Screen" }
+        ];
+
+        // --- Helper functions ---
+        function sleep(ms) {
+            return new Promise(resolve => setTimeout(resolve, ms));
+        }
+
+        function renderGallery(items) {
+            galleryContainer.innerHTML = ''; 
+            items.forEach(item => {
+                const galleryItem = document.createElement('div');
+                galleryItem.className = 'gallery-item rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-shadow duration-300 cursor-pointer bg-white';
+                
+                const imageUrl = item.imageUrl || `https://placehold.co/400x300/6C757D/ffffff?text=No+Image`;
+                
+                galleryItem.innerHTML = `
+                    <img src="${imageUrl}" 
+                         onerror="this.onerror=null;this.src='https://placehold.co/400x300/D9D9D9/888888?text=Image+Missing';" 
+                         alt="${item.title}" 
+                         class="w-full h-48 object-cover transition-transform duration-300">
+                    <div class="p-4">
+                        <h3 class="text-xl font-bold text-gray-800 mb-1">${item.title}</h3>
+                        <p class="text-sm text-gray-500">${item.description}</p>
+                    </div>
+                `;
+                galleryContainer.appendChild(galleryItem);
+            });
+        }
+        
+        function displayMockImages() {
+            renderGallery(mockImages);
+        }
+
+        // --- Load Gallery Images from Firestore (unchanged) ---
+        function loadGalleryImages() {
+            const imagesCollectionPath = `artifacts/${appId}/public/data/gallery_images`;
+            const imagesCollectionRef = collection(db, imagesCollectionPath);
+            
+            onSnapshot(imagesCollectionRef, (snapshot) => {
+                const galleryItems = [];
+                snapshot.forEach((doc) => {
+                    galleryItems.push(doc.data());
+                });
+
+                if (galleryItems.length > 0) {
+                    renderGallery(galleryItems);
+                } else {
+                    displayMockImages();
+                    console.log("No data found in Firestore gallery. Displaying mock images.");
+                }
+            }, (error) => {
+                console.error("Error listening to gallery images:", error);
+                displayMockImages();
+            });
+        }
+
+        // --- Initial data function (unchanged) ---
+        async function addMockGalleryData() {
+            const imagesCollectionRef = collection(db, `artifacts/${appId}/public/data/gallery_images`);
+            try {
+                const q = query(imagesCollectionRef);
+                const querySnapshot = await getDocs(q);
+
+                if (querySnapshot.empty) {
+                    console.log("Adding initial mock data to public gallery.");
+                    for (const item of mockImages) {
+                        await addDoc(imagesCollectionRef, {
+                            title: item.title,
+                            description: item.description,
+                            imageUrl: item.imageUrl, 
+                            timestamp: serverTimestamp()
+                        });
+                    }
+                }
+            } catch (error) {
+                console.warn("Failed to add mock gallery data, likely due to write permissions:", error);
+            }
+        }
+
+        // --- Handle Form Submission ---
+        async function handleFormSubmit(event) {
+            event.preventDefault();
+
+            submitBtn.disabled = true;
+            submitBtn.textContent = '提交中...';
+            successMessage.classList.add('hidden');
+            errorMessage.classList.add('hidden');
+
+            let user = auth.currentUser;
+            
+            // 如果用戶物件還沒準備好 (匿名登入尚未完成)，等待 1000 毫秒再試一次。
+            if (!user) {
+                console.log("User not ready, waiting 1000ms...");
+                await sleep(1000);
+                user = auth.currentUser;
+            }
+
+            if (!user) {
+                // 如果等待後仍無法取得用戶物件 (可能環境出錯或網路不穩)
+                errorMessage.textContent = '❌ 提交失敗！網路或權限初始化失敗。請檢查您的連線後重新整理頁面。';
+                errorMessage.classList.remove('hidden');
+                submitBtn.disabled = false;
+                submitBtn.textContent = '提交設計需求';
+                return;
+            }
+
+            const orderData = {
+                name: document.getElementById('name').value,
+                contact: document.getElementById('contact').value,
+                userMaterial: document.getElementById('userMaterial').value,
+                furnitureType: document.getElementById('furnitureType').value,
+                details: document.getElementById('details').value,
+                status: '待處理',
+                timestamp: serverTimestamp(),
+                // 記錄提交者資訊 (使用匿名 ID)
+                submittedBy: user.uid, 
+                isAnonymous: user.isAnonymous
+            };
+
+            try {
+                // 訂單寫入公開路徑: /artifacts/{appId}/public/data/orders
+                const ordersCollectionRef = collection(db, `artifacts/${appId}/public/data/orders`);
+                await addDoc(ordersCollectionRef, orderData);
+
+                successMessage.classList.remove('hidden');
+                form.reset();
+            } catch (error) {
+                console.error("Error submitting design request:", error);
+                
+                const errorMsg = error.message.includes('permission-denied') ? 
+                    '❌ 權限被拒絕！ (後台錯誤)' : 
+                    `❌ 提交失敗！ (訊息: ${error.message})`;
+                    
+                errorMessage.textContent = errorMsg;
+                errorMessage.classList.remove('hidden');
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.textContent = '提交設計需求';
+            }
+        }
+
+        // --- Initialization ---
+        function initialize() {
+            // 1. 立即啟動匿名登入 (非同步執行，會在後台靜默獲取權限)
+            (async () => {
+                try {
+                    if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
+                         // 嘗試使用自定義 Token，失敗則退回匿名
+                         signInWithCustomToken(auth, __initial_auth_token).catch(() => signInAnonymously(auth));
+                    } else if (!auth.currentUser) {
+                         // 否則直接匿名登入
+                         signInAnonymously(auth);
+                    }
+                } catch (error) {
+                    console.error("Authentication failed during initialization:", error);
+                }
+            })();
+            
+            // 2. 載入圖片 (與認證狀態解耦)
+            loadGalleryImages(); 
+            addMockGalleryData();
+            
+            // 3. 按鈕已預設啟用，無需額外操作。
+        }
+        
+        // Add event listeners
+        form.addEventListener('submit', handleFormSubmit);
+
+        // Start the application
+        initialize();
+
+    </script>
+</body>
+</html>
