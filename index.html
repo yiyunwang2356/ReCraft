@@ -104,9 +104,30 @@
   <button type="submit">送出</button>
 </form>
 
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
 <script>
+// Firebase已初始化，並且有下面這段
+const formDataRef = firebase.database().ref("formData");
+
+// 監聽表單提交事件
+document.getElementById("myForm").addEventListener("submit", (e) => {
+  e.preventDefault(); // 阻止預設行為（送出後重整）
+
+  const name = document.getElementById("name").value;
+  const email = document.getElementById("email").value;
+
+  const data = { name, email };
+
+  // 這段放在這裡，點擊送出時就會執行插入資料
+  formDataRef.push(data)
+    .then(() => {
+      console.log("資料寫入成功");
+      e.target.reset(); // 清空表單
+    })
+    .catch((error) => {
+      console.error("寫入失敗:", error);
+    });
+});
+</script>
 
                         <!-- 提交按鈕預設啟用 (移除 disabled) -->
                       
