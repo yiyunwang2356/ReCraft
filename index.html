@@ -4,21 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Re:Craft - 訂製傢俱設計</title>
+    <!-- Load Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Custom Fonts: Noto Serif TC (Chinese headings) and Poppins (Latin/General) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600;700&family=Poppins:wght@300;400;500;700&display=swap" rel="stylesheet">
     
     <style>
+        /* Base typography settings */
         body {
-            /* 優先使用 Poppins for numbers/Latin, Noto for Chinese */
-            font-family: 'Poppins', 'Noto Sans TC', sans-serif;
+            font-family: 'Poppins', 'Noto Serif TC', sans-serif;
             background-color: #FDFDFC;
             color: #333;
         }
         h1, h2, h3 {
             font-family: 'Noto Serif TC', serif;
         }
+        
         /* Gallery Image Hover Effect */
         .gallery-item img {
             transition: transform 0.3s ease-in-out;
@@ -26,6 +29,7 @@
         .gallery-item:hover img {
             transform: scale(1.03);
         }
+        
         /* Custom form styling for a subtle look */
         .form-input {
             background-color: transparent;
@@ -35,23 +39,56 @@
         .form-input:focus {
             outline: none;
             border-color: #333;
-            box-shadow: 0 0 0 2px rgba(51, 51, 51, 0.1);
+            box-shadow: 0 0 0 2px rgba(51, 51, 51, 0.2);
         }
-        /* Ensure the modal content is responsive for small screens */
+        
+        /* Responsive Modal adjustments */
+        @media (min-width: 768px) {
+            .modal-content-area {
+                /* Set maximum height for content scrolling on desktop */
+                max-height: calc(90vh - 40px); 
+            }
+        }
         @media (max-width: 767px) {
             .modal-content-area {
-                max-height: 50vh; /* Limit content height on mobile */
+                /* Ensure content is scrollable on mobile */
+                max-height: 40vh; 
             }
+        }
+        /* Style for line breaks in description */
+        .description-content {
+            white-space: pre-wrap;
         }
     </style>
 </head>
 <body class="antialiased">
 
-    <!-- Header Section -->
-    <header class="py-8 px-6 md:px-12 border-b">
-        <div class="container mx-auto text-center">
-            <h1 class="text-4xl md:text-5xl font-bold tracking-wider text-gray-800">Re:Craft</h1>
-            <p class="mt-2 text-lg text-gray-500">讓舊物重生，打造專屬傢俱</p>
+    <!-- Header Section - Updated to use Logo and flexible layout -->
+    <header id="home" class="py-4 px-6 md:px-12 border-b bg-white shadow-lg sticky top-0 z-40">
+        <div class="container mx-auto flex justify-between items-center">
+            <!-- Logo - Uses a placeholder image -->
+            <a href="#home" class="logo">
+                <img src="https://placehold.co/150x40/333333/FFFFFF?text=Re:Craft+Logo" 
+                     alt="Re:Craft 網站 Logo" 
+                     class="h-10 w-auto rounded-md"
+                     onerror="this.onerror=null;this.src='https://placehold.co/150x40/CCCCCC/333333?text=Re:Craft'"
+                >
+            </a>
+            
+            <!-- Navigation and Mobile Menu -->
+            <div class="flex items-center gap-6">
+                <!-- Desktop Navigation Links -->
+                <nav class="hidden md:block font-medium">
+                    <a href="#gallery" class="text-gray-600 hover:text-gray-800 transition duration-150 p-2">設計靈感</a>
+                    <a href="#process" class="text-gray-600 hover:text-gray-800 transition duration-150 p-2 ml-4">製作流程</a>
+                    <a href="#order-form" class="bg-gray-800 text-white py-2 px-4 rounded-md ml-4 hover:bg-gray-700 transition duration-150">訂製報價</a>
+                </nav>
+                
+                <!-- Mobile Menu Button (No functionality implemented as per single-file rule) -->
+                <button class="md:hidden text-gray-800 hover:text-gray-900 text-2xl p-2" aria-label="Menu">
+                    ☰
+                </button>
+            </div>
         </div>
     </header>
 
@@ -70,21 +107,31 @@
         <section id="gallery" class="my-20 md:my-32">
             <h2 class="text-3xl font-semibold text-center mb-6 text-gray-800">設計靈感</h2>
             
-            <!-- Concise Reminder: Check Firestore if no images appear -->
-            <div class="max-w-4xl mx-auto mb-12 p-4 border border-blue-200 bg-blue-50 rounded-lg text-sm text-gray-700 text-center">
-                <p class="font-bold mb-1">📢 提示：如果此處沒有顯示您的圖片，請確認已在 Firestore 路徑 
-                    <code class="font-mono bg-blue-100 p-1 rounded">artifacts/&lcub;App ID&rcub;/public/data/gallery_images</code>
-                    中新增圖片資料。
+            <!-- Firestore Data Warning and Instructions -->
+            <div class="max-w-4xl mx-auto mb-12 p-4 border border-blue-300 bg-blue-100/50 rounded-xl text-sm text-gray-700">
+                <p class="font-bold mb-2 flex items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-blue-600" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd" />
+                    </svg>
+                    Firestore 資料庫提示
                 </p>
+                <p class="pl-7">此畫廊從 Firestore 讀取資料。請在以下路徑新增文件以顯示您的圖片：</p>
+                <code class="font-mono bg-blue-200 p-2 rounded block mt-2 mx-7 break-all">artifacts/&lcub;App ID&rcub;/public/data/gallery_images</code>
+                <p class="pl-7 mt-2">（如果資料庫為空，將顯示兩個預設範例圖片。）</p>
             </div>
             
-            <div id="inspiration-gallery" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8">
+            <div id="inspiration-gallery" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
                 <!-- Gallery items will be injected here by JavaScript -->
-                <div class="text-center col-span-full py-16 text-gray-500">
-                    載入設計圖片中... (如果停留在此處，請檢查 Firestore 資料是否已新增)
+                <div id="loading-message" class="text-center col-span-full py-16 text-gray-500 flex flex-col items-center">
+                    <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-gray-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                    </svg>
+                    載入設計圖片中...
                 </div>
             </div>
         </section>
+
 
         <!-- Process Section -->
         <section id="process" class="my-20 md:my-32">
