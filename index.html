@@ -66,35 +66,22 @@
             </p>
         </section>
 
-               <!-- Inspiration Gallery Section -->
+        <!-- Inspiration Gallery Section -->
         <section id="gallery" class="my-20 md:my-32">
             <h2 class="text-3xl font-semibold text-center mb-6 text-gray-800">設計靈感</h2>
             
-
-{
-  "title": "Joinery 邊桌",
-  "description": "W30*D30*H42cm \n使用餐桌剩餘山毛櫸實木桌板製作，設計簡潔，搭配客廳整體色調，適合北歐風空間。",
-  "url": "https://raw.githubusercontent.com/yiyunwang2356/ReCraft/089cd2f001e6881eaddd7c3b2fcf63ff089be50c/night%20stand.jpg" 
-}
-</pre>
-
-                <h4 class="mt-4 font-semibold text-gray-800">2. Marble 邊桌 (大板磚)</h4>
-                <pre class="bg-gray-800 text-white p-3 rounded-md overflow-x-auto text-xs sm:text-sm mt-2">
-{
-  "title": "Marble 邊桌",
-  "description": "R50*H55cm \n使用電視牆剩餘綠色大理石紋大板磚製作，搭配胡桃木桌腳，桌板45度倒角細節。",
-  "url": "https://raw.githubusercontent.com/yiyunwang2356/ReCraft/7c3abb3b92479a370dbcd6df61c5b019fafc3491/mable%20side%20table.jpg" 
-}
-</pre>
-                <p class="text-xs sm:text-sm mt-3 p-2 bg-green-100 text-green-700 rounded-md">
-                    <strong class="font-bold">下一步：</strong> 現在兩個產品的圖片網址都已備齊。請將這兩個完整的 JSON 結構作為**獨立的文件 (Document)** 存入 Cloud Firestore 的 `artifacts/&lcub;App ID&rcub;/public/data/gallery_images` 集合中，網頁將會自動載入並顯示它們。
+            <!-- Concise Reminder: Check Firestore if no images appear -->
+            <div class="max-w-4xl mx-auto mb-12 p-4 border border-blue-200 bg-blue-50 rounded-lg text-sm text-gray-700 text-center">
+                <p class="font-bold mb-1">📢 提示：如果此處沒有顯示您的圖片，請確認已在 Firestore 路徑 
+                    <code class="font-mono bg-blue-100 p-1 rounded">artifacts/&lcub;App ID&rcub;/public/data/gallery_images</code>
+                    中新增圖片資料。
                 </p>
             </div>
             
             <div id="inspiration-gallery" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8">
                 <!-- Gallery items will be injected here by JavaScript -->
                 <div class="text-center col-span-full py-16 text-gray-500">
-                    載入設計圖片中...
+                    載入設計圖片中... (如果停留在此處，請檢查 Firestore 資料是否已新增)
                 </div>
             </div>
         </section>
