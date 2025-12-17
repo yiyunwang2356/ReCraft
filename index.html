@@ -1,97 +1,107 @@
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Re:Craft - 訂製傢俱設計</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <style>
-    body {
-        /* 優先使用 [Poppins for numbers/Latin, Noto for Chinese](pplx://action/translate) */
-        font-family: 'Poppins', 'Noto Sans TC', sans-serif;
-        background-color: #FDFDFC;
-        color: #333;
-    }
-    h1, h2, h3 {
-        font-family: 'Noto Serif TC', serif;
-    }
-    /* Gallery Image Hover Effect */
-    .gallery-item img {
-        transition: transform 0.3s ease-in-out;
-    }
-    .gallery-item:hover img {
-        transform: scale(1.03);
-    }
-    /* Custom form styling for a subtle look */
-    .form-input {
-        background-color: transparent;
-        border: 1px solid #ccc;
-        transition: all 0.3s;
-    }
-    .form-input:focus {
-        outline: none;
-        border-color: #333;
-        box-shadow: 0 0 0 2px rgba(51, 51, 51, 0.1);
-    }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Re:Craft - 訂製傢俱設計</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600;700&family=Poppins:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            /* 優先使用 Poppins for numbers/Latin, Noto for Chinese */
+            font-family: 'Poppins', 'Noto Sans TC', sans-serif;
+            background-color: #FDFDFC;
+            color: #333;
+        }
+        h1, h2, h3 {
+            font-family: 'Noto Serif TC', serif;
+        }
+        /* Gallery Image Hover Effect */
+        .gallery-item img {
+            transition: transform 0.3s ease-in-out;
+        }
+        .gallery-item:hover img {
+            transform: scale(1.03);
+        }
+        /* Custom form styling for a subtle look */
+        .form-input {
+            background-color: transparent;
+            border: 1px solid #ccc;
+            transition: all 0.3s;
+        }
+        .form-input:focus {
+            outline: none;
+            border-color: #333;
+            box-shadow: 0 0 0 2px rgba(51, 51, 51, 0.1);
+        }
+        /* Ensure the modal content is responsive for small screens */
+        @media (max-width: 767px) {
+            .modal-content-area {
+                max-height: 50vh; /* Limit content height on mobile */
+            }
+        }
+    </style>
 </head>
-<body>
+<body class="antialiased">
 
-<!-- Header Section -->
-<header class="py-8 px-6 md:px-12 border-b">
-    <div class="container mx-auto text-center">
-        <h1 class="text-4xl md:text-5xl font-bold tracking-wider text-gray-800">Re:Craft</h1>
-        <p class="mt-2 text-lg text-gray-500">讓舊物重生，打造專屬傢俱</p>
-    </div>
-</header>
-
-
-<!-- Main Content Area -->
-<main class="container mx-auto px-6 md:px-12">
-
-
-    <!-- Introduction Section -->
-    <section class="text-center max-w-3xl mx-auto my-16 md:my-24">
-        <h2 class="text-3xl font-semibold mb-6 text-gray-700">重新設計，定義您的空間</h2>
-        <p class="text-base md:text-lg leading-relaxed text-gray-600">
-            透過我們的服務，您可以將舊的、不再使用的材料或傢俱賦予新的生命。Re:Craft 致力於將您的創意轉化為獨特的設計，無論是利用老木材、廢棄金屬，或是任何您提供的材料，我們都能為您創造出兼具美觀與實用性的訂製傢俱。
-        </p>
-    </section>
-
-
-    <!-- Inspiration Gallery Section -->
-    <section id="gallery" class="my-20 md:my-32">
-        <h2 class="text-3xl font-semibold text-center mb-12 text-gray-800">設計靈感</h2>
-        <div id="inspiration-gallery" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8">
-            <!-- Gallery items will be injected here by JavaScript -->
-            <div class="text-center col-span-full py-16 text-gray-500">
-                載入設計圖片中...
-            </div>
+    <!-- Header Section -->
+    <header class="py-8 px-6 md:px-12 border-b">
+        <div class="container mx-auto text-center">
+            <h1 class="text-4xl md:text-5xl font-bold tracking-wider text-gray-800">Re:Craft</h1>
+            <p class="mt-2 text-lg text-gray-500">讓舊物重生，打造專屬傢俱</p>
         </div>
-    </section>
+    </header>
 
+    <!-- Main Content Area -->
+    <main class="container mx-auto px-6 md:px-12">
 
-    <!-- Process Section -->
-    <section id="process" class="my-20 md:my-32">
-        <h2 class="text-3xl font-semibold text-center mb-12 text-gray-800">我們的製作流程</h2>
-        <div class="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-10 text-center">
-            <div class="process-step">
-                <div class="text-4xl font-bold text-gray-300 mb-2">01</div>
-                <h3 class="text-xl font-semibold mb-2">提交設計材料與需求</h3>
-                <p class="text-gray-600">請告訴我們您想使用的材料種類、傢俱類型與功能需求，我們會進行初步評估。</p>
+        <!-- Introduction Section -->
+        <section class="text-center max-w-3xl mx-auto my-16 md:my-24">
+            <h2 class="text-3xl font-semibold mb-6 text-gray-700">重新設計，定義您的空間</h2>
+            <p class="text-base md:text-lg leading-relaxed text-gray-600">
+                透過我們的服務，您可以將舊的、不再使用的材料或傢俱賦予新的生命。Re:Craft 致力於將您的創意轉化為獨特的設計，無論是利用老木材、廢棄金屬，或是任何您提供的材料，我們都能為您創造出兼具美觀與實用性的訂製傢俱。
+            </p>
+        </section>
+
+        <!-- Inspiration Gallery Section -->
+        <section id="gallery" class="my-20 md:my-32">
+            <h2 class="text-3xl font-semibold text-center mb-6 text-gray-800">設計靈感</h2>
+            
+              
             </div>
-            <div class="process-step">
-                <div class="text-4xl font-bold text-gray-300 mb-2">02</div>
-                <h3 class="text-xl font-semibold mb-2">設計草圖與報價</h3>
-                <p class="text-gray-600">我們的設計師將根據您的需求製作 3D 草圖，並提供詳細的報價供您確認。</p>
+            
+            <div id="inspiration-gallery" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8">
+                <!-- Gallery items will be injected here by JavaScript -->
+                <div class="text-center col-span-full py-16 text-gray-500">
+                    載入設計圖片中...
+                </div>
             </div>
-            <div class="process-step">
-                <div class="text-4xl font-bold text-gray-300 mb-2">03</div>
-                <h3 class="text-xl font-semibold mb-2">製作與運送</h3>
-                <p class="text-gray-600">確認設計後，我們將開始製作並定期向您更新進度，確保成品能準時交付到您手上。</p>
+        </section>
+
+        <!-- Process Section -->
+        <section id="process" class="my-20 md:my-32">
+            <h2 class="text-3xl font-semibold text-center mb-12 text-gray-800">我們的製作流程</h2>
+            <div class="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-10 text-center">
+                <div class="process-step">
+                    <div class="text-4xl font-bold text-gray-300 mb-2">01</div>
+                    <h3 class="text-xl font-semibold mb-2">提交設計材料與需求</h3>
+                    <p class="text-gray-600">請告訴我們您想使用的材料種類、傢俱類型與功能需求，我們會進行初步評估。</p>
+                </div>
+                <div class="process-step">
+                    <div class="text-4xl font-bold text-gray-300 mb-2">02</div>
+                    <h3 class="text-xl font-semibold mb-2">設計草圖與報價</h3>
+                    <p class="text-gray-600">我們的設計師將根據您的需求製作 3D 草圖，並提供詳細的報價供您確認。</p>
+                </div>
+                <div class="process-step">
+                    <div class="text-4xl font-bold text-gray-300 mb-2">03</div>
+                    <h3 class="text-xl font-semibold mb-2">製作與運送</h3>
+                    <p class="text-gray-600">確認設計後，我們將開始製作並定期向您更新進度，確保成品能準時交付到您手上。</p>
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
 
   <main class="container mx-auto p-6 md:p-12">
     <section class="max-w-2xl mx-auto bg-gray-50 p-8 rounded-xl shadow-lg">
