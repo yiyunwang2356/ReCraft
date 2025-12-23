@@ -1,202 +1,259 @@
 <!DOCTYPE html>
-<html lang="zh-Hant">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Re:Craft - 訂製傢俱設計</title>
-    <!-- Load Tailwind CSS -->
+    <title>Re:Craft | Sustainable Design Studio</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Custom Fonts: Noto Serif TC (Chinese headings) and Poppins (Latin/General) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600;700&family=Poppins:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
     
     <style>
-        /* Base typography settings */
         body {
-            font-family: 'Poppins', 'Noto Serif TC', sans-serif;
-            background-color: #FDFDFC;
-            color: #333;
+            font-family: 'Inter', sans-serif;
+            background-color: #F9F9F7;
+            color: #1A1A1A;
+            scroll-behavior: smooth;
         }
         h1, h2, h3 {
-            font-family: 'Noto Serif TC', serif;
+            font-family: 'Playfair Display', serif;
         }
         
-        /* Gallery Image Hover Effect */
-        .gallery-item img {
-            transition: transform 0.3s ease-in-out;
+        .gallery-card {
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
         }
-        .gallery-item:hover img {
-            transform: scale(1.03);
-        }
-        
-        /* Custom form styling for a subtle look */
-        .form-input {
-            background-color: transparent;
-            border: 1px solid #ccc;
-            transition: all 0.3s;
-        }
-        .form-input:focus {
-            outline: none;
-            border-color: #333;
-            box-shadow: 0 0 0 2px rgba(51, 51, 51, 0.2);
+        .gallery-card:hover {
+            transform: translateY(-8px);
         }
         
-        /* Responsive Modal adjustments */
-        @media (min-width: 768px) {
-            .modal-content-area {
-                /* Set maximum height for content scrolling on desktop */
-                max-height: calc(90vh - 40px); 
-            }
+        .modal-overlay {
+            background-color: rgba(26, 26, 26, 0.95);
+            backdrop-filter: blur(8px);
         }
-        @media (max-width: 767px) {
-            .modal-content-area {
-                /* Ensure content is scrollable on mobile */
-                max-height: 40vh; 
-            }
+
+        /* Ensure modal content is scrollable if description is long */
+        .modal-content-wrapper {
+            max-height: 90vh;
+            overflow-y: auto;
         }
-        /* Style for line breaks in description */
-        .description-content {
-            white-space: pre-wrap;
+
+        .close-button {
+            transition: all 0.3s ease;
+            background: white;
+            color: black;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        .close-button:hover {
+            transform: scale(1.1) rotate(90deg);
         }
     </style>
 </head>
 <body class="antialiased">
 
-    <!-- Header Section - Updated to use Logo and flexible layout -->
-    <header id="home" class="py-4 px-6 md:px-12 border-b bg-white shadow-lg sticky top-0 z-40">
-        <div class="container mx-auto flex justify-between items-center">
-            <!-- Logo - Uses a placeholder image -->
-            <a href="#home" class="logo">
-                <img src="https://placehold.co/150x40/333333/FFFFFF?text=Re:Craft+Logo" 
-                     alt="Re:Craft 網站 Logo" 
-                     class="h-10 w-auto rounded-md"
-                     onerror="this.onerror=null;this.src='https://placehold.co/150x40/CCCCCC/333333?text=Re:Craft'"
-                >
-            </a>
-            
-            <!-- Navigation and Mobile Menu -->
-            <div class="flex items-center gap-6">
-                <!-- Desktop Navigation Links -->
-                <nav class="hidden md:block font-medium">
-                    <a href="#gallery" class="text-gray-600 hover:text-gray-800 transition duration-150 p-2">設計靈感</a>
-                    <a href="#process" class="text-gray-600 hover:text-gray-800 transition duration-150 p-2 ml-4">製作流程</a>
-                    <a href="#order-form" class="bg-gray-800 text-white py-2 px-4 rounded-md ml-4 hover:bg-gray-700 transition duration-150">訂製報價</a>
-                </nav>
-                
-                <!-- Mobile Menu Button (No functionality implemented as per single-file rule) -->
-                <button class="md:hidden text-gray-800 hover:text-gray-900 text-2xl p-2" aria-label="Menu">
-                    ☰
-                </button>
-            </div>
+    <!-- Navigation -->
+    <nav class="py-8 px-6 md:px-12 flex justify-between items-center sticky top-0 bg-white/50 backdrop-blur-md z-40 border-b border-neutral-100">
+        <h1 class="text-2xl font-bold tracking-tighter">Re:Craft</h1>
+        <div class="space-x-8 text-[11px] uppercase tracking-[0.2em] font-medium hidden md:block">
+            <a href="#portfolio" class="hover:opacity-50">Portfolio</a>
+            <a href="#concept" class="hover:opacity-50">The Concept</a>
+            <a href="#contact" class="border px-4 py-2 border-black rounded-full hover:bg-black hover:text-white transition-all">Inquire</a>
         </div>
-    </header>
+    </nav>
 
-    <!-- Main Content Area -->
     <main class="container mx-auto px-6 md:px-12">
 
-        <!-- Introduction Section -->
-        <section class="text-center max-w-3xl mx-auto my-16 md:my-24">
-            <h2 class="text-3xl font-semibold mb-6 text-gray-700">重新設計，定義您的空間</h2>
-            <p class="text-base md:text-lg leading-relaxed text-gray-600">
-                透過我們的服務，您可以將舊的、不再使用的材料或傢俱賦予新的生命。Re:Craft 致力於將您的創意轉化為獨特的設計，無論是利用老木材、廢棄金屬，或是任何您提供的材料，我們都能為您創造出兼具美觀與實用性的訂製傢俱。
+        <!-- Hero -->
+        <section class="mt-20 mb-32 max-w-4xl">
+            <h2 class="text-5xl md:text-7xl font-medium leading-[1.1] mb-8">Elevating surplus materials into <span class="italic">timeless</span> furniture.</h2>
+            <p class="text-lg md:text-xl text-neutral-500 font-light max-w-2xl">
+                We bridge the gap between industrial waste and high-end residential design, focusing on material circularity and Nordic craftsmanship.
             </p>
         </section>
 
-        <!-- Inspiration Gallery Section -->
-        <section id="gallery" class="my-20 md:my-32">
-            <h2 class="text-3xl font-semibold text-center mb-6 text-gray-800">設計靈感</h2>
-            
-         
+        <!-- Portfolio Grid -->
+        <section id="portfolio" class="mb-32">
+            <div class="flex items-end justify-between mb-12">
+                <h3 class="text-3xl font-semibold">Latest Works</h3>
+                <span class="text-neutral-400 text-xs tracking-widest uppercase pb-1">2024 Collection</span>
             </div>
             
-            <div id="inspiration-gallery" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-                <!-- Gallery items will be injected here by JavaScript -->
-                <div id="loading-message" class="text-center col-span-full py-16 text-gray-500 flex flex-col items-center">
-                    <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-gray-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                    </svg>
-                    載入設計圖片中...
-                </div>
+            <div id="gallery-grid" class="grid grid-cols-1 md:grid-cols-2 gap-16">
+                <!-- Items injected here via JS -->
             </div>
         </section>
 
+        <!-- Philosophy Section -->
+        <section id="concept" class="py-24 border-t border-neutral-200 grid grid-cols-1 md:grid-cols-2 gap-20 items-center">
+            <div>
+                <h2 class="text-4xl mb-6 italic">Material Integrity</h2>
+                <p class="text-neutral-600 mb-8 leading-relaxed">
+                    Our process begins with surplus assessment. Whether it's high-grade beech wood from dining table production or porcelain slabs from architectural features, we treat every fragment as a premium resource.
+                </p>
+                <div class="grid grid-cols-2 gap-8">
+                    <div>
+                        <span class="block text-2xl font-serif">100%</span>
+                        <span class="text-[10px] uppercase tracking-widest text-neutral-400">Reclaimed Material</span>
+                    </div>
+                    <div>
+                        <span class="block text-2xl font-serif">Nordic</span>
+                        <span class="text-[10px] uppercase tracking-widest text-neutral-400">Design Language</span>
+                    </div>
+                </div>
+            </div>
+            <div class="aspect-[4/5] bg-neutral-100 rounded-sm overflow-hidden">
+                <img src="https://raw.githubusercontent.com/yiyunwang2356/ReCraft/e9192b3ba7054fdee7352b2787c8757e1f3153e9/night%20stand.jpg" class="w-full h-full object-cover opacity-80" alt="Process detail">
+            </div>
+        </section>
 
-  <main class="container mx-auto p-6 md:p-12">
-    <section class="max-w-2xl mx-auto bg-gray-50 p-8 rounded-xl shadow-lg">
-      <h2 class="text-3xl font-semibold mb-10 text-gray-800 text-center">獲取您的訂製報價</h2>
-      <form id="myForm" class="space-y-4">
-        <input type="text" id="name" name="name" placeholder="請輸入姓名" required
-          class="w-full form-input p-3 rounded" />
-        <input type="email" id="email" name="email" placeholder="請輸入Email" required
-          class="w-full form-input p-3 rounded" />
-        <button type="submit"
-          class="w-full bg-gray-800 text-white py-3 rounded hover:bg-gray-700 transition duration-300">送出</button>
-      </form>
-      <div id="statusMessage" class="mt-6 text-center hidden"></div>
-    </section>
-  </main>
+        <!-- Contact Section -->
+        <section id="contact" class="py-32 max-w-xl mx-auto text-center">
+            <h2 class="text-4xl mb-4">Start a Commission</h2>
+            <form id="contactForm" class="space-y-6 text-left mt-12">
+                <div>
+                    <label class="text-[10px] uppercase tracking-widest font-bold text-neutral-400 mb-2 block">Your Name</label>
+                    <input type="text" name="name" required class="w-full bg-white border border-neutral-200 px-4 py-3 focus:outline-none focus:border-black transition-colors">
+                </div>
+                <div>
+                    <label class="text-[10px] uppercase tracking-widest font-bold text-neutral-400 mb-2 block">Email Address</label>
+                    <input type="email" name="email" required class="w-full bg-white border border-neutral-200 px-4 py-3 focus:outline-none focus:border-black transition-colors">
+                </div>
+                <button type="submit" id="submitBtn" class="w-full bg-black text-white py-4 text-[11px] font-bold uppercase tracking-[0.3em] hover:bg-neutral-800 transition-all">
+                    Send Inquiry
+                </button>
+            </form>
+            <div id="formSuccess" class="hidden mt-6 text-sm text-green-600 font-medium">Message sent successfully.</div>
+        </section>
 
-  <footer class="bg-gray-100 py-8 border-t text-center text-gray-500 text-sm">
-    <p>© 2025 Re:Craft. All Rights Reserved.</p>
-  </footer>
+    </main>
 
-  <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
-    import { getDatabase, ref, push } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-database.js";
+    <!-- Footer -->
+    <footer class="py-12 border-t border-neutral-100 text-center">
+        <p class="text-[10px] uppercase tracking-[0.4em] text-neutral-400">© 2025 Re:Craft Studio</p>
+    </footer>
 
-    const firebaseConfig = {
-      apiKey: "AIzaSyCubiHxEiErAXJo93inT-6TQUpY9UkHKbg",
-      authDomain: "recraft-project-4bc73.firebaseapp.com",
-      databaseURL: "https://recraft-project-4bc73-default-rtdb.asia-southeast1.firebasedatabase.app/",
-      projectId: "recraft-project-4bc73",
-      storageBucket: "recraft-project-4bc73.firebasestorage.app",
-      messagingSenderId: "934327341215",
-      appId: "G-98NGGJGJKK"
-    };
+    <!-- Product Modal -->
+    <div id="modal" class="fixed inset-0 z-50 hidden modal-overlay flex items-center justify-center p-4 md:p-8" onclick="closeModalOnOverlay(event)">
+        <!-- Fixed Close Button -->
+        <button onclick="closeModal()" class="close-button absolute top-6 right-6 md:top-10 md:right-10 z-[60] p-3 rounded-full flex items-center justify-center">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+        </button>
 
-    // 初始化 Firebase
-    const app = initializeApp(firebaseConfig);
-    const database = getDatabase(app);
+        <div id="modalBody" class="bg-white w-full max-w-5xl flex flex-col md:flex-row relative shadow-2xl modal-content-wrapper rounded-lg overflow-hidden">
+            <div class="md:w-1/2 bg-neutral-100">
+                <img id="modalImg" src="" class="w-full h-full object-cover aspect-square md:aspect-auto">
+            </div>
+            
+            <div class="md:w-1/2 p-8 md:p-16 flex flex-col justify-center">
+                <span id="modalSpec" class="text-[10px] tracking-[0.3em] uppercase text-neutral-400 mb-4 font-bold"></span>
+                <h3 id="modalTitle" class="text-3xl md:text-5xl mb-6 leading-tight"></h3>
+                <p id="modalDesc" class="text-neutral-600 text-sm md:text-base mb-10 leading-relaxed font-light"></p>
+                <div class="flex gap-4">
+                    <button onclick="closeModal(); document.getElementById('contact').scrollIntoView();" class="bg-black text-white px-8 py-3 text-[10px] font-bold uppercase tracking-widest hover:bg-neutral-800 transition-colors">
+                        Inquire
+                    </button>
+                    <button onclick="closeModal()" class="border border-neutral-200 px-8 py-3 text-[10px] font-bold uppercase tracking-widest hover:bg-neutral-50 transition-colors">
+                        Close
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
 
-    // 取得 Realtime Database 的參考
-    const formDataRef = ref(database, "formData");
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+        import { getAuth, signInAnonymously } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
 
-    const form = document.getElementById("myForm");
-    const statusMessage = document.getElementById("statusMessage");
+        const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : {};
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'recraft-portfolio';
 
-    form.addEventListener("submit", (e) => {
-      e.preventDefault();
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+        const auth = getAuth(app);
 
-      // 清空狀態訊息
-      statusMessage.textContent = "";
-      statusMessage.classList.add("hidden");
+        const products = [
+            {
+                title: "Joinery Side Table",
+                spec: "W30 D30 H42cm",
+                description: "Crafted from repurposed solid beech wood panels originally used in high-end dining table production. Featuring a minimalist design that harmonizes effortlessly with contemporary living room color schemes, it is perfectly suited for Nordic-style interiors.",
+                url: "https://raw.githubusercontent.com/yiyunwang2356/ReCraft/e9192b3ba7054fdee7352b2787c8757e1f3153e9/night%20stand.jpg"
+            },
+            {
+                title: "Marble Side Table",
+                spec: "R50 H55cm",
+                description: "This table is made from surplus green marble-patterned porcelain slabs salvaged from television feature wall installations, paired with solid walnut wood legs. The design highlights a sophisticated 45-degree chamfered edge on the tabletop, creating a sharp yet fluid silhouette.",
+                url: "https://raw.githubusercontent.com/yiyunwang2356/ReCraft/e9192b3ba7054fdee7352b2787c8757e1f3153e9/mable%20side%20table.jpg"
+            }
+        ];
 
-      // 取得表單欄位值
-      const name = form.name.value.trim();
-      const email = form.email.value.trim();
+        const grid = document.getElementById('gallery-grid');
+        const modal = document.getElementById('modal');
 
-      // 準備資料物件
-      const data = { name, email };
-
-      // 寫入Realtime Database
-      push(formDataRef, data)
-        .then(() => {
-          statusMessage.textContent = "資料寫入成功！我們將盡快與您聯繫。";
-          statusMessage.classList.remove("hidden");
-          statusMessage.classList.remove("text-red-600");
-          statusMessage.classList.add("text-green-600");
-
-          form.reset();
-        })
-        .catch((error) => {
-          statusMessage.textContent = "資料寫入失敗：" + error.message;
-          statusMessage.classList.remove("hidden");
-          statusMessage.classList.remove("text-green-600");
-          statusMessage.classList.add("text-red-600");
+        products.forEach((p, idx) => {
+            const card = document.createElement('div');
+            card.className = 'gallery-card group cursor-pointer';
+            card.innerHTML = `
+                <div class="aspect-square bg-white overflow-hidden mb-6 relative">
+                    <img src="${p.url}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                    <div class="absolute inset-0 bg-black/10 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                        <span class="text-white text-[10px] uppercase tracking-widest font-bold border border-white px-6 py-2 bg-black/20 backdrop-blur-sm">Details</span>
+                    </div>
+                </div>
+                <div class="flex justify-between items-start">
+                    <div>
+                        <h4 class="text-xl font-bold mb-1">${p.title}</h4>
+                        <p class="text-neutral-400 text-xs font-light">${p.spec}</p>
+                    </div>
+                    <span class="text-neutral-200 text-3xl font-serif">0${idx+1}</span>
+                </div>
+            `;
+            card.onclick = () => openModal(p);
+            grid.appendChild(card);
         });
-    });
-  </script>
+
+        window.openModal = (p) => {
+            document.getElementById('modalImg').src = p.url;
+            document.getElementById('modalTitle').textContent = p.title;
+            document.getElementById('modalSpec').textContent = p.spec;
+            document.getElementById('modalDesc').textContent = p.description;
+            modal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        };
+
+        window.closeModal = () => {
+            modal.classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        };
+
+        window.closeModalOnOverlay = (e) => {
+            if (e.target === modal) closeModal();
+        };
+
+        const contactForm = document.getElementById('contactForm');
+        contactForm.onsubmit = async (e) => {
+            e.preventDefault();
+            const btn = document.getElementById('submitBtn');
+            btn.disabled = true;
+            btn.textContent = 'Submitting...';
+
+            try {
+                await signInAnonymously(auth);
+                const data = {
+                    name: contactForm.name.value,
+                    email: contactForm.email.value,
+                    timestamp: serverTimestamp(),
+                };
+                await addDoc(collection(db, 'artifacts', appId, 'public', 'data', 'inquiries'), data);
+                document.getElementById('formSuccess').classList.remove('hidden');
+                contactForm.reset();
+            } catch (err) {
+                console.error(err);
+            } finally {
+                btn.disabled = false;
+                btn.textContent = 'Send Inquiry';
+            }
+        };
+    </script>
 </body>
 </html>
